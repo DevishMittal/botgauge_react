@@ -1,4 +1,4 @@
-/* Modal Overlay/Backdrop */
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -12,14 +12,12 @@
     z-index: 1000;
 }
 
-/* Main Modal Container */
+
 .modal-container {
     background: white;
     width: 90%;
     max-width: 600px;
-    /* Adjust based on preference */
     height: 80vh;
-    /* Fixed height ratio */
     max-height: 700px;
     border-radius: 8px;
     display: flex;
@@ -29,10 +27,10 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* Header */
+
 .modal-header {
     padding: 16px 24px;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1.5px solid #d9ece1;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -68,7 +66,7 @@
 .tab-button {
     padding: 6px 12px;
     border-radius: 6px;
-    border: 1px solid transparent;
+    border: 1.5px solid transparent;
     background: none;
     cursor: pointer;
     font-size: 14px;
@@ -86,13 +84,12 @@
     object-fit: contain;
 }
 
-/* Looking at screenshot: Active tab looks like it has a light background and border */
+
 .tab-button.active {
     background-color: #f0fdf4;
-    /* Light green tint */
-    border-color: #708974;
+    border-color: #d9ece1;
     color: #166534;
-    /* Darker green */
+    
 }
 
 /* Content Area */
@@ -100,10 +97,12 @@
     flex: 1;
     padding: 24px;
     overflow: hidden;
-    /* Manage scroll internally in list */
     display: flex;
     flex-direction: column;
     gap: 16px;
+    border: 1.5px solid #d9ece1;
+    margin: 24px;
+    border-radius: 8px;
 }
 
 .section-title {
@@ -111,6 +110,8 @@
     font-weight: 600;
     color: #333;
     margin: 0;
+    padding-bottom: 12px;
+    border-bottom: 1.5px solid #d9ece1;
 }
 
 .search-input-container {
@@ -122,7 +123,7 @@
     width: 95%;
     padding: 10px 5px;
     padding-right: 1px;
-    border: 1px solid #708974;
+    border: 1.5px solid #d9ece1;
     border-radius: 6px;
     font-size: 14px;
     outline: none;
@@ -142,7 +143,7 @@
     opacity: 0.5;
 }
 
-/* List */
+
 .items-list {
     flex: 1;
     overflow-y: auto;
@@ -150,7 +151,7 @@
     flex-direction: column;
     gap: 8px;
     padding-right: 4px;
-    /* Space for scrollbar */
+
 }
 
 .item-row {
@@ -173,13 +174,12 @@
     color: #333;
 }
 
-/* Footer */
+
 .modal-footer {
     padding: 16px 24px;
-    border-top: 1px solid #e0e0e0;
+    border-top: 1.5px solid #d9ece1;
     display: flex;
     justify-content: center;
-    /* Screenshot shows centered? Or right aligned? Screenshot has Cancel left (or center-left?) and Save right? Actually screenshot shows Cancel and Save on the right side. Wait, looking at Footer in screenshot... "Cancel" text button, "Save" filled button. They seem to be on the right or center. Let's aim for right aligned as is standard, or check screenshot again. Screenshot 1: Footer has Cancel (text) and Save (green button) on the right. */
     justify-content: flex-end;
     gap: 12px;
 }
