@@ -17,30 +17,31 @@ export const ModalHeader: React.FC<ModalHeaderProps> = ({
 }) => {
     return (
         <div className="modal-header">
-            <div className="header-top">
+            <div className="header-content-left">
                 <h2 className="modal-title">Add Items</h2>
-                <button className="close-btn" onClick={onClose} aria-label="Close">
-                    &times;
-                </button>
-            </div>
+                <div className="tabs-container">
+                    <button
+                        className={`tab-button ${activeTab === 'vegetables' ? 'active' : ''}`}
+                        onClick={() => onTabChange('vegetables')}
+                    >
+                        <img src="/icons/vegetables.svg" alt="" className="tab-icon" />
+                        <span>Vegetables</span>
+                        <span className="count-badge">{getCount('vegetables')}</span>
+                    </button>
 
-            <div className="tabs-container">
-                <button
-                    className={`tab-button ${activeTab === 'vegetables' ? 'active' : ''}`}
-                    onClick={() => onTabChange('vegetables')}
-                >
-                    <span>Vegetables</span>
-                    <span className="count-badge">{getCount('vegetables')}</span>
-                </button>
-
-                <button
-                    className={`tab-button ${activeTab === 'fruits' ? 'active' : ''}`}
-                    onClick={() => onTabChange('fruits')}
-                >
-                    <span>Fruits</span>
-                    <span className="count-badge">{getCount('fruits')}</span>
-                </button>
+                    <button
+                        className={`tab-button ${activeTab === 'fruits' ? 'active' : ''}`}
+                        onClick={() => onTabChange('fruits')}
+                    >
+                        <img src="/icons/fruits.svg" alt="" className="tab-icon" />
+                        <span>Fruits</span>
+                        <span className="count-badge">{getCount('fruits')}</span>
+                    </button>
+                </div>
             </div>
+            <button className="close-btn" onClick={onClose} aria-label="Close">
+                &times;
+            </button>
         </div>
     );
 };

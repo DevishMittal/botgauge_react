@@ -37,7 +37,7 @@ export const ModalList: React.FC<ModalListProps> = ({
                     value={searchText}
                     onChange={(e) => onSearchChange(e.target.value)}
                 />
-                <span className="search-icon">🔍</span>
+                <img src="/icons/search.svg" alt="Search" className="search-icon" />
             </div>
 
             <div className="items-list">
@@ -53,7 +53,7 @@ export const ModalList: React.FC<ModalListProps> = ({
                         <span className="item-label" style={{ fontWeight: 600 }}>Select All</span>
                     </div>
                 )}
-                
+
                 {items.length === 0 ? (
                     <div className="empty-state">No items found</div>
                 ) : (
