@@ -115,13 +115,14 @@
 
 .search-input-container {
     position: relative;
+    width: 100%;
 }
 
 .search-input {
-    width: 100%;
-    padding: 10px 12px;
-    padding-right: 36px;
-    border: 1px solid #e0e0e0;
+    width: 95%;
+    padding: 10px 5px;
+    padding-right: 1px;
+    border: 1px solid #708974;
     border-radius: 6px;
     font-size: 14px;
     outline: none;
@@ -133,7 +134,7 @@
 
 .search-icon {
     position: absolute;
-    right: 12px;
+    right: 28px;
     top: 50%;
     transform: translateY(-50%);
     width: 16px;
