@@ -1,73 +1,68 @@
-# React + TypeScript + Vite
+# BotGauge React Assignment
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Features
 
-Currently, two official plugins are available:
+- **Categorized Selection**: Independent tabs for Fruits and Vegetables.
+- **Search Filtering**: Real-time search with **debouncing** for performance.
+- **Persistent Selection**: Selections are maintained while switching tabs.
+- **Instant Updates**: Selection counts update immediately.
+- **Clean UI**: Responsive modal with sticky header/footer and scrollable list.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
 
-## React Compiler
+- **React** 
+- **TypeScript**
+- **Vite**
+- **CSS** 
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Project Structure
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├── components/
+│   └── ItemModal/
+│       ├── ItemModal.tsx       # Main container (Smart Component)
+│       ├── ItemModal.css       # Component-specific styles
+│       ├── ModalHeader.tsx     # Pure presentation component for tabs
+│       ├── ModalList.tsx       # Pure presentation component for the list
+│       └── ModalFooter.tsx     # Pure presentation component for actions
+├── hooks/
+│   ├── useSelection.ts         # Custom hook encapsulating all business logic
+│   └── useDebounce.ts          # Hook for debouncing search input
+├── data/
+│   └── items.ts                # Mock data source
+└── types/
+    └── index.ts                # Shared type definitions
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Architecture Decisions
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1.  **Separation of Concerns (Logic vs. View)**:
+    - All state management and logic (filtering, toggling, counts) is extracted into `useSelection` hook.
+    - `ItemModal` acts as the "Controller" connecting the hook to the UI.
+    - `ModalHeader`, `ModalList`, and `ModalFooter` are "Dumb" functional components that only render props.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+2.  **State Management**:
+    - `selectedIds`: A `Set` is used (wrapped in a new Set for React immutability) for O(1) lookups during rendering.
+    - `activeTab`: Simple string state.
+    - `searchText`: Managed locally but coupled with the hook to filter generic lists.
+
+3.  **Performance**:
+    - `useMemo` is used for filtering items and preventing unnecessary re-calculations of the derived lists.
+    - `useCallback` is used for handlers to maintain referential equality.
+    - `Debouncing` is used for search input.
+
+4.  **Extensibility**:
+    - The `ItemModal` accepts `itemsData` as a prop, making it decoupled from the specific mock data file.
+
+## How to Run
+
+1.  Install dependencies:
+    ```bash
+    npm install
+    ```
+2.  Start the dev server:
+    ```bash
+    npm run dev
+    ```
+
