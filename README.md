@@ -1,5 +1,5 @@
 # BotGauge React Assignment
-
+- Deployed at: https://botgauge-react.vercel.app/
 ## Features
 
 - **Categorized Selection**: Independent tabs for Fruits and Vegetables.
