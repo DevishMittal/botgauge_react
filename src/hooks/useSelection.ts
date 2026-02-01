@@ -28,6 +28,7 @@ export const useSelection = (itemsData: ItemsData) => {
         setSelectedIds(prev => {
             const newSet = new Set(prev);
             if (newSet.has(id)) {
+                //deselect
                 newSet.delete(id);
             } else {
                 newSet.add(id);
@@ -36,27 +37,24 @@ export const useSelection = (itemsData: ItemsData) => {
         });
     }, []);
 
-    //Select All / Deselect All for current filtered items
-    //Applies only to active category
-    // "Applies only to active category" - usually Select All applies to visible items or all items in category. 
-    // Standard pattern: Select all items in the CURRENT filtered view (or category if no search).
+    //Select /deselect all for current filtered items
     const toggleSelectAll = useCallback(() => {
         setSelectedIds(prev => {
             const newSet = new Set(prev);
             const allSelected = filteredItems.every(item => prev.has(item.id));
 
             if (allSelected) {
-                // Deselect all visible
+                //deselect all visible
                 filteredItems.forEach(item => newSet.delete(item.id));
             } else {
-                // Select all visible
                 filteredItems.forEach(item => newSet.add(item.id));
             }
             return newSet;
         });
     }, [filteredItems]);
 
-    //Switch Tab
+    
+//Switch Tab
     const handleTabChange = useCallback((tab: Category) => {
         setActiveTab(tab);
         setSearchText('');
